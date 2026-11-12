@@ -1,14 +1,16 @@
+
 // Unions
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
+// Union definition
 typedef union {
     int i;
     float f;
     char str[20];
 } UnionData;
 
+// Structure definition
 typedef struct {
     int i;
     float f;
@@ -18,40 +20,47 @@ typedef struct {
 int main() {
 
     UnionData udata;
-
     StructData sdata;
-    // sdata = (StructData) {10, 220.5, "Struct Programming"};
+
+    // Assign values to structure
     sdata.i = 10;
+    sdata.f = 220.5f;
     strcpy(sdata.str, "Struct Programming");
-    sdata.f = 220.5;
 
+    // Assign and display union integer
     udata.i = 10;
-    printf("udata.i: %d\n", udata.i);
+    printf("Union Integer: %d\n", udata.i);
 
+    // Assign and display union string
     strcpy(udata.str, "Union Programming");
-    printf("udata.str: %s\n", udata.str);
+    printf("Union String: %s\n", udata.str);
 
-    udata.f = 220.5;
-    printf("udata.f: %.2f\n\n", udata.f);
+    // Assign and display union float
+    udata.f = 220.5f;
+    printf("Union Float: %.2f\n", udata.f);
 
-    // Now see the values after overwriting
-    printf("After overwriting:\n");
-    printf("udata.i: %d\n", udata.i);
-    printf("udata.str: %s\n", udata.str);
-    printf("udata.f: %.2f\n\n", udata.f);
+    // Display current active union member
+    printf("\nAfter overwriting:\n");
+    printf("Union Float: %.2f\n", udata.f);
 
-    // Memory Addresses - Union
-    printf("udata.i: %p\n", &udata.i);
-    printf("udata.str: %p\n", &udata.str);
-    printf("udata.f: %p\n\n", &udata.f);
+    // Memory addresses of union members
+    printf("\nMemory Addresses - Union:\n");
+    printf("udata.i:   %p\n", (void *)&udata.i);
+    printf("udata.str: %p\n", (void *)&udata.str);
+    printf("udata.f:   %p\n", (void *)&udata.f);
 
-    // Memory Addresses - Struct
-    printf("sdata.i: %p\n", &sdata.i);
-    printf("sdata.str: %p\n", &sdata.str);
-    printf("sdata.f: %p\n\n", &sdata.f);
+    // Memory addresses of structure members
+    printf("\nMemory Addresses - Structure:\n");
+    printf("sdata.i:   %p\n", (void *)&sdata.i);
+    printf("sdata.str: %p\n", (void *)&sdata.str);
+    printf("sdata.f:   %p\n", (void *)&sdata.f);
 
-    printf("Size of the Union - %lu\n", sizeof(UnionData));
-    printf("Size of the Structure - %lu\n", sizeof(StructData));
+    // Display memory sizes
+    printf("\nSize of Union: %zu bytes\n",
+           sizeof(UnionData));
+
+    printf("Size of Structure: %zu bytes\n",
+           sizeof(StructData));
 
     return 0;
 }
